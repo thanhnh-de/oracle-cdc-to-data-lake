@@ -1,0 +1,29 @@
+{
+    "name": "oracle-inventory-source-connector",
+    "config": {
+        "database.history.kafka.topic": "history",
+        "database.history.kafka.bootstrap.servers": "broker:29092",
+        "database.server.name": "test",
+        "schema.history.internal.kafka.bootstrap.servers": "broker:29092",
+        "value.converter.schema.registry.url": "http://schema-registry:8081",
+        "schema.history.internal.kafka.topic": "history",
+        "database.schema": "DEBEZIUM",
+        "key.converter.schema.registry.url": "http://schema-registry:8081",
+        "name": "oracle-inventory-source-connector",
+        "connector.class": "io.debezium.connector.oracle.OracleConnector",
+        "tasks.max": "1",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "topic.prefix": "test",
+        "database.hostname": "host.docker.internal",
+        "database.port": "1521",
+        "database.user": "c##dbzuser",
+        "database.password": "dbz",
+        "database.dbname": "ORCLCDB",
+        "database.pdb.name": "ORCLPDB1",
+        "snapshot.mode": "initial",
+        "database.connection.adapter": "logminer",
+        "table.include.list": "DEBEZIUM.INVENTORY",
+        "include.schema.changes": "true"
+    }
+}
