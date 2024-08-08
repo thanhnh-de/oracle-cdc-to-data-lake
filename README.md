@@ -39,7 +39,7 @@ Pull image from Oracle image registry: https://container-registry.oracle.com/ord
 5. Access oracle container environment  
    `docker exec -it oracle bash`  
    Run this bash script
-   `Create sample database`
+   curl https://raw.githubusercontent.com/thanhnh-de/oracle-cdc-to-data-lake/main/oracle/setup_logminer.sh | sh
 6. Check if the database was created successfully  
    `sqlplus Debezium/dbz@localhost:1521/orclpdb1`
    SELECT \* FROM INVENTORY;

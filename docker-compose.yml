@@ -3,7 +3,7 @@ services:
     image: container-registry.oracle.com/database/enterprise:latest # 21C
     container_name: oracle
     environment:
-      - ORACLE_PWD=top_secret
+      - ORACLE_PWD=ora_password
     ports:
       - 1521:1521
     restart: always
@@ -104,8 +104,6 @@ services:
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:7.6.0
     container_name: ksqldb-cli
-    networks:
-      iceberg_net:
     depends_on:
       - broker
       - connect
@@ -210,3 +208,6 @@ services:
       - AWS_SECRET_ACCESS_KEY=password
       - AWS_REGION=us-east-1
     restart: always
+
+networks:
+  iceberg_net:
