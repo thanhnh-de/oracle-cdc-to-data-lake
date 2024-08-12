@@ -91,7 +91,26 @@ Download this connector file to local environemnt
   KEY_FORMAT = 'AVRO',
   VALUE_FORMAT = 'AVRO'
 );`
+- Click Run Query
+- Check the stream: `select * from  INVENTORY_CHANGES;`
+- Manipulate the stream by transforming and enriching it:  
+`CREATE STREAM INVENTORY_CHANGES_PROCESSED AS
+SELECT 
+  rowkey,
+  COALESCE(before->ITEM_NAME, after->ITEM_NAME) as ITEM_NAME,
+  COALESCE(before->DETAILS, after->DETAILS) as DETAILS,
+  COALESCE(before->PRICE, after->PRICE) as PRICE,
+  op as op_type,
+  ts_ms as op_ts,
+  source->scn as scn,
+  source->`CONNECTOR` as `connector`,
+  source->db + '.' + source->schema + '.' + source->`TABLE` as `table`
+FROM INVENTORY_CHANGES 
+EMIT CHANGES;`
 
+After doing this, you'll see a newly created topic in the topic panel, now we will sink this topic to our data lake
+
+### 5. Setup sink connector
 
 
 

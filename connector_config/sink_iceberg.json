@@ -1,0 +1,33 @@
+{
+    "name": "iceberg-inventory-sink-connector",
+    "config": {
+        "name": "iceberg-inventory-sink-connector",
+        "connector.class": "io.tabular.iceberg.connect.IcebergSinkConnector",
+        "tasks.max": "1",
+        "topics": "INVENTORY_CHANGES_PROCESSED",
+        "iceberg.tables": "psa.inventory",
+        "iceberg.tables.evolve-schema-enabled": "true",
+        "iceberg.tables.auto-create-enabled": "true",
+        "iceberg.control.commit.interval-ms": "0",
+        "iceberg.catalog.s3.endpoint": "http://host.docker.internal:9000",
+        "iceberg.catalog.client.region": "us-east-1",
+        "iceberg.catalog.s3.path.style.access": "true",
+        "iceberg.catalog.s3.aws.credentials.provide": "com.amazonaws.auth.DefaultAWSCredentialsProviderChain",
+        "iceberg.catalog.s3.access-key-id": "admin",
+        "iceberg.catalog.s3.secret-access-key": "password",
+        "iceberg.catalog.s3.path-style-access": "true",
+        "iceberg.catalog.io-impl": "org.apache.iceberg.aws.s3.S3FileIO",
+        "iceberg.catalog.type": "rest",
+        "iceberg.catalog.uri": "http://host.docker.internal:8181",
+        "iceberg.catalog": "demo",
+        "value.converter.schema.registry.url": "http://schema-registry:8081",
+        "value.converter.schemas.enable": "false",
+        "key.converter.schema.registry.url": "http://schema-registry:8081",
+        "iceberg.com.amazonaws.services.s3.enableV4": "true",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "transforms": "InsertField",
+        "transforms.InsertField.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+        "transforms.InsertField.offset.field": "offset"
+    }
+}
